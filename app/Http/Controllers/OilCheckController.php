@@ -27,6 +27,9 @@ class OilCheckController extends Controller
 
     public function show(OilCheck $oilCheck)
     {
-        return "Result page for oil check #{$oilCheck->id}.";
+        return view('oil-checks.show', [
+            'oilCheck' => $oilCheck,
+            'isDue' => $oilCheck->isDueForOilChange(),
+        ]);
     }
 }
