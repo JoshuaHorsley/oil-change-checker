@@ -9,7 +9,7 @@ class OilCheckController extends Controller
 {
     public function create()
     {
-        return 'Form page will go here.';
+        return view('oil-checks.create');
     }
 
     public function store(Request $request)
