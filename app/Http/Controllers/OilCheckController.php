@@ -14,7 +14,15 @@ class OilCheckController extends Controller
 
     public function store(Request $request)
     {
-        return 'Form submission will be handled here.';
+        $validated = $request->validate([
+            'current_odometer' => ['required', 'integer', 'min:0', 'gte:previous_odometer'],
+            'previous_odometer' => ['required', 'integer', 'min:0'],
+            'previous_oil_change_date' => ['required', 'date', 'before:today'],
+        ]);
+
+        $oilCheck = OilCheck::create($validated);
+
+        return redirect()->route('oil-checks.show', $oilCheck);
     }
 
     public function show(OilCheck $oilCheck)
